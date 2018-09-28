@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!--
+- This page is meant to showcase a subset sampling of API request to the Cisco
+- Finesse Web Services. It also implements the ability to use the Cisco AXL
+- library to connect to the Finesse Notification Service to receive events.
+- Usage of this page requires that a proxy be setup to forward request to the
+- Cisco Finesse server. Please refer to the README for info regarding proxy
+- configuration.
+-->
+<html lang=en>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+        <script type="text/javascript">
+        //Set the JabberWerx connect to unsecure because the custom authentication
+        //on the XMPP server does not support encrypted credentials.
+        var jabberwerx_config = {unsecureAllowed: true};
+        </script>
+
+        <!-- Import jQuery library which is used do DOM manipulation and make Ajax requests -->
+		<script type="text/javascript" src="resources/js/jquery-1.9.1.min.js"></script>
+
+        <!-- Uses the Cisco AXL library (aka JabberWerx) to setup and receive events -->
+		<script type="text/javascript" src="resources/js/jabberwerx.js"></script>
+		
+        <!-- Load the sample Finessenongadget sample which showcase examples of making requests. -->
+        <script type="text/javascript" src="resources/js/finessenongadget.js"></script>
+
+        <!-- Load core page controller JS to bind buttons and show/hide appropriate UI elements -->
+        <script type="text/javascript" src="resources/js/sample.js"></script>
+    </head>
+
+    <body>
+       <h1>Finesse Non-Gadget Sample</h1>
+
+       <h4>This sample is a very simple example that demonstrates some of the RESTful Finesse APIs without even a gadget.
+       </h4>
+       <p><p>
+ 
+       <div id="actions-sign-in-out">
+            <div id="div-signin">
+                <form id="form-agent-signin">
+                    <label for="field-agentid">AgentID:</label>
+                    <input type="text" id="field-agentid" />
+
+                    <label for="field-password">Password:</label>
+                    <input type="password" id="field-password" />
+
+                    <label for="field-extension">Extension:</label>
+                    <input type="text" id="field-extension" />
+
+                    <label for="field-domain">Domain:</label>
+                    <input type="text" id="field-domain" />
+
+                    <input type="submit" value="Sign In"/>
+                </form>
+            </div>
+
+            <div id="div-signout">
+               <span id="span-agent-info"></span>
+               <input type="button" value="Sign Out" id="button-signout">
+            </div>
+        </div>
+
+        <h2>Console</h2>
+        <textarea id="console-area" style="width:100%; height:125px"></textarea>
+        <input type="button" value="Clear Console" id="button-clear-console"/>
+
+        <div id="actions">
+
+            <div id="actions-agent">
+                <h2>Agent Actions</h2>
+                <input type="button" value="GET Agent State" id="button-get-agent-state" />
+                <input type="button" value="CHANGE Agent State READY" id="button-change-agent-state-ready" />
+				<input type="button" value="CHANGE Agent State NOT_READY" id="button-change-agent-state-notready" />
+            </div>
+
+            <div id="actions-call-control">
+                <h2>Call Control</h2>
+
+                <p>
+                    <b>Call Events</b>
+                </p>
+
+                <p>
+                    <form id="form-call-control-make">
+                        <label for="field-call-control-make-dialnum">Number:</label>
+                        <input type="text" id="field-call-control-make-dialnum"/>
+                        <input type="submit" value="MAKE Call" />
+                    </form>
+                </p>
+
+                <p>
+                    <label for="field-call-control-callid">CallId:</label>
+                    <input type="text" id="field-call-control-callid"/>
+                    <input type="button" value="ANSWER Call" id="button-call-control-answer"/>
+                    <input type="button" value="HOLD Call" id="button-call-control-hold"/>
+                    <input type="button" value="RETRIEVE Call" id="button-call-control-retrieve"/>
+                    <input type="button" value="DROP Call" id="button-call-control-drop"/>
+                </p>
+                </p>
+            </div>
+
+        </div>
+
+    </body>
+</html>
