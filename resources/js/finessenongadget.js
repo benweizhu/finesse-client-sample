@@ -19,7 +19,7 @@ var Finesse = function (username, password) {
     _credentials = jabberwerx.util.crypto.b64Encode(username + ":" + password),
 
     //The webapp path to preprend to all API requests.
-    _webappPath = "/finesse",
+    _webappPath = "http://10.10.20.10:8082/finesse",
 
     /**
      * Add headers to the API request.

@@ -83,6 +83,7 @@ function onClientError(rsp) {
  * Event handler that prints events to console.
  */
 function _eventHandler(data) {
+    console.log(data);
     print2Console("EVENT", data);
 
 	data = data.selected.firstChild.data;
@@ -115,7 +116,7 @@ function _eventConnect() {
         jwArgs = {
             //Defines the BOSH path. Should match the path pattern in the proxy
             //so that it knows where to forward the BOSH request to.
-            httpBindingURL: "/http-bind",
+            httpBindingURL: "http://10.10.20.10:7071/http-bind/",
             //Calls this function callback on successful BOSH connection by the
             //JabberWerx library.
 			errorCallback: onClientError,
@@ -132,9 +133,10 @@ function _eventConnect() {
         _jwClient.event("messageReceived").bindWhen(
                 "event[xmlns='http://jabber.org/protocol/pubsub#event'] items item notification",
                 _eventHandler);
+
 		_jwClient.event("clientStatusChanged").bind(function(evt) {
             if (evt.data.next == jabberwerx.Client.status_connected) {
-                // attempt to login the agent
+                // attempt to login the agent 
                 _finesse.signIn(_username, _extension, true, _signInHandler, _signInHandler);
 		   } else if ( evt.data.next == jabberwerx.Client.status_disconnected) {
                 _finesse.signOut(_username, _extension, null, _signOutHandler, _signOutHandler);
